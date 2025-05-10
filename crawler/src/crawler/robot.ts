@@ -10,7 +10,10 @@ export interface Robots {
   sitemap?: string;
 }
 
-async function parse(url: URL, userAgent: string): Promise<Robots | null> {
+export async function parse(
+  url: URL,
+  userAgent: string
+): Promise<Robots | null> {
   const robotsURL = new URL("/robots.txt", url.origin);
 
   let res;
@@ -55,12 +58,8 @@ async function parse(url: URL, userAgent: string): Promise<Robots | null> {
   return out;
 }
 
-// userAgentToken = "GiggleBot"
+// "JayBot"
 // "https://en.wikipedia.org/wiki/Lists_of_websites"
-const result = parse(
-  new URL("https://en.wikipedia.org/wiki/Lists_of_websites"),
-  "GiggleBot"
-);
 
 export function check(robots: Robots | null): boolean {
   if (!robots) return true;

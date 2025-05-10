@@ -1,9 +1,31 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
+import { populate, start } from "./crawler/crawler";
+import index from "./indexer";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+// Main function to run the crawler and indexer
+async function main() {
+  console.log("Starting crawler process...");
+  try {
+    console.log("Running crawler...");
+    // await populate();
+    await start();
+    console.log("Running indexer...");
+    await index();
+    console.log("Process completed successfully");
+  } catch (error) {
+    console.error("Error in crawler process:", error);
+    process.exit(1);
+  }
+}
 
-export default app
+app.get("/", (c) => {
+  main().catch((error) => {
+    console.error("Unhandled error in main process:", error);
+    process.exit(1);
+  });
+  return c.text("Hello Hono!");
+});
+
+export default app;
