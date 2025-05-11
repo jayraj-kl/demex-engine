@@ -1,8 +1,13 @@
 "use client";
-import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 
 export default function Home() {
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+
   const placeholders = [
     "What's the first rule of Fight Club?",
     "Who is Tyler Durden?",
@@ -13,10 +18,12 @@ export default function Home() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
+    setQuery(e.target.value);
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submitted");
+    router.push("/search?query=" + query);
+    console.log("submitted: ", query);
   };
   return (
     <>
