@@ -148,6 +148,12 @@ DATABASE_URL=postgres://myuser:mypassword@localhost:5433/mydb
 2. Develop/run the frontend to access the search functionality
 3. Make changes to the schema using Drizzle ORM and generate migrations as needed
 
+## Demo Video
+
+Below is a demonstration of the search engine in action:
+
+https://github.com/user-attachments/assets/078d307d-7088-4385-8303-eb7896543732
+
 ## Deployment
 
 ### Crawler
